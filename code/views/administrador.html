@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <script src="../js/cargar_products.js"></script>
+</head>
+<body>
+<header>
+    <ul>
+        <li ><a onclick="salir()">Salir</a></li>
+    </ul>
+</header>
+<section class="menu_products">
+    <p>Elija la categoria:</p>
+    <select id="categoria_prod">
+        <option value="Pizzas pequeñas" onclick="">Pizzas pequeñas</option>
+        <option value="Pizzas medianas" onclick="">Pizzas medianas</option>
+        <option value="Pizzas grandes" onclick="">Pizzas grandes</option>
+        <option value="Pizzas personales" onclick="">Pizzas personales</option>
+        <option value="Gaseosas" onclick="">Gaseosas</option>
+        <option value="Batidos" onclick="">Batidos</option>
+    </select>
+    <div>
+        <button  type="button" class="btn btn-success btn-circle btn-lg"><span class="glyphicon glyphicon-plus" data-title="Add" data-toggle="modal" data-target="#add"></span></button>
+        <button  type="button" class="btn btn-success btn-circle btn-lg"><span class="glyphicon glyphicon-list-alt" data-title="Consultas" data-toggle="modal" data-target="#consultas"></span></button>
+    </div>
+    <!--View of adding a product-->
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="nombre_producto" placeholder="nombre del producto">
+                    <input type="text" id="precio_producto" placeholder="precio del producto">
+                    <input type="text" id="descripcion_producto" placeholder="descripcion del producto">
+                    <input type="number" id="cantidad_producto" placeholder="cantidad del producto">
+                    <select id="categoria_producto">
+                        <option value="Pizzas pequeñas">Pizzas pequeñas</option>
+                        <option value="Pizzas medianas">Pizzas medianas</option>
+                        <option value="Pizzas grandes">Pizzas grandes</option>
+                        <option value="Pizzas personales">Pizzas personales</option>
+                        <option value="Gaseosas">Gaseosas</option>
+                        <option value="Batidos">Batidos</option>
+                    </select>
+                    <p>Seleccione la imagen</p>
+                    <input type="file" id="files" name="files[]" multiple="">
+                    <output id="list"></output>
+                    <button type="button" class="btn btn-default" onclick="addProduct()" data-dismiss="modal">Agregar producto</button>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+    <!--View modified-->
+    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="nombre_producto_m" placeholder="nombre del producto">
+                    <input type="text" id="precio_producto_m" placeholder="precio del producto">
+                    <input type="text" id="descripcion_producto_m" placeholder="descripcion del producto">
+                    <input type="number" id="cantidad_producto_m" >
+                    <p id="img_anterior_m">Por defecto</p>
+                    <select id="categoria_producto_m">
+                        <option value="Pizzas pequeñas">Pizzas pequeñas</option>
+                        <option value="Pizzas medianas">Pizzas medianas</option>
+                        <option value="Pizzas grandes">Pizzas grandes</option>
+                        <option value="Pizzas personales">Pizzas personales</option>
+                        <option value="Gaseosas">Gaseosas</option>
+                        <option value="Batidos">Batidos</option>
+                    </select>
+                    <p>Seleccione la imagen</p>
+                    <input type="file" id="files_m" name="files[]" multiple="">
+                    <output id="list_m"></output>
+                    <button type="button" class="btn btn-default" onclick="Modifica()" data-dismiss="modal">Modificar producto</button>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+
+    <!--Consultas-->
+    <div class="modal fade" id="consultas" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                </div>
+                <div class="modal-body">
+                    <select id="consultas_admi">
+                        <option value="Persona con más compras">Persona con más compras</option>
+                        <option value="Persona con menos compras">Persona con menos compras</option>
+                        <option value="Persona con menos dinero invertido">Persona con menos dinero invertido</option>
+                        <option value="Persona con mayor dinero invertido">Persona con mas dinero invertido</option>
+                    </select>
+
+                    <section class="t_consultas">
+
+                        <table id="tabla_consultas" class="table table-bordered"></table>
+
+                    </section>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+</section>
+<!--Product table -->
+<section class="t_products">
+   <table id="table_products" class="table table-bordered"></table>
+</section>
+
+
+<footer>
+    <table >
+        <tr>
+            <td>
+                <a href="https://www.facebook.com/Jogos-PIZZA-381616418862894/" class="image"><img  src="../img/contacto/facebook.png" width="50" height="50"  data-file-width="5293" data-file-height="3970"></a>
+            </td>
+            <td>
+                <a href="https://www.google.co.cr/maps/place/Jogo's+Pizza/@10.3600181,-84.5096313,17z/data=!4m5!3m4!1s0x0:0xc9ec6d06a5eeea29!8m2!3d10.3600181!4d-84.5083299" class="image"><img  src="../img/contacto/contacto.png" width="100" height="50"  data-file-width="5293" data-file-height="3970"></a>
+            </td>
+        </tr>
+    </table>
+    <p>copyright by Luis Andres Fernandez Calderon && Jurguen Romero</p>
+</footer>
+<script src="../plugins/base64/base64.js"></script>
+<script src="../login.js"></script>
+<script src="../js/admin.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

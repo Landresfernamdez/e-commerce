@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="plugins/alertify/alertify.js"></script>
+    <link rel="stylesheet" type="text/css" href="plugins/alertify/css/alertify.css">
+    <link rel="stylesheet" type="text/css" href="plugins/alertify/css/themes/default.css">
+
+
+
+    <script src="js/datos.js"></script>
+    //Alertify
+    <!-- JavaScript -->
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+
+<header>
+    <a href="#contacto"><img style=" float: left; margin-top: 0%;background-attachment: fixed" width="100px" height="50px;" src="img/jogos/logo_jogos.png" ></a>
+</header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-5 col-md-3">
+                <div class="form-login">
+                    <h4>Bienvenido</h4>
+                    <input type="text" id="id" class="form-control input-sm chat-input" placeholder="username" />
+                    </br>
+                    <input type="password" id="pass" class="form-control input-sm chat-input" placeholder="password" />
+                    </br>
+                    <div class="wrapper">
+                        <span class="group-btn">
+                            <a  class="btn btn-primary btn-md" onclick="validar()">login <i class="fa fa-sign-in"></i></a>
+                            <a  class="btn btn-primary btn-md"data-toggle="modal" data-target="#registro" >registro<i class="fa fa-sign-in"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Register view-->
+    <div id="registro" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+
+                </div>
+                <div class="modal-body">
+                    <div class="form-login">
+                        <h4>Registro</h4>
+                        <input type="text" id="name_c" class="form-control input-sm chat-input" placeholder="nombre de usuario" />
+                        </br>
+                        <input type="text" id="apellido1_c" class="form-control input-sm chat-input" placeholder="primer apellido" />
+                        </br>
+                        <input type="text" id="apellido2_c" class="form-control input-sm chat-input" placeholder="segundo apellido" />
+                        </br>
+                        <input type="text" id="edad" class="form-control input-sm chat-input" placeholder="edad" />
+                        </br><input type="text" id="email" class="form-control input-sm chat-input" placeholder="email" />
+                        </br><input type="text" id="direccion" class="form-control input-sm chat-input" placeholder="direccion" />
+                        </br><input type="text" id="telefono" class="form-control input-sm chat-input" placeholder="telefono" />
+                        </br>
+                        <input type="text" id="pass_c" class="form-control input-sm chat-input" placeholder="contraseña" />
+                        </br>
+                        <input type="text" id="num_tarjeta" class="form-control input-sm chat-input" placeholder="codigo de tarjeta" />
+                        </br>
+                        <input type="text" id="cod_c" class="form-control input-sm chat-input" placeholder="codigo de seguridad" />
+
+                        </br></br>
+                        <p>Fecha de expiracion de la tarjeta</p>
+                        <input type="date" id="fecha_expira" class="form-control input-sm chat-input" placeholder="fecha de expiracion" />
+
+                        <div class="wrapper">
+                                <span class="group-btn">
+                                    <a  class="btn btn-primary btn-md" onclick="guardarRegistro()" data-dismiss="modal">Registrar <i class="fa fa-sign-in"></i></a>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<script src="login.js"></script>
+</body>
+<footer>
+    <table >
+        <tr>
+            <td>
+                <a href="https://www.facebook.com/PepsiCR/?brand_redir=339150749455906" class="image"><img alt="Ferrari 488 GTB.jpg" src="img/contacto/facebook.png" width="50" height="50"  data-file-width="5293" data-file-height="3970"></a>
+            </td>
+            <td>
+                <a href="https://twitter.com/pepsi?lang=es" class="image"><img alt="Ferrari 488 GTB.jpg" src="img/contacto/twiter.png" width="50" height="50"  data-file-width="5293" data-file-height="3970"></a>
+            </td>
+            <td>
+                <a href="http://www.florida.co.cr/contacto" class="image"><img  src="img/contacto/contacto.png" width="100" height="50"  data-file-width="5293" data-file-height="3970"></a>
+            </td>
+        </tr>
+    </table>
+    <p>copyright by Luis Andres Fernandez Calderon && Jurguen Romero</p>
+</footer>
+</html>

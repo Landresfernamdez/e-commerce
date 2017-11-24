@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="../plugins/alertify/alertify.js"></script>
+    <link rel="stylesheet" type="text/css" href="../plugins/alertify/css/alertify.css">
+    <link rel="stylesheet" type="text/css" href="../plugins/alertify/css/themes/default.css">
+
+    <script src="../js/customer.js"></script>
+    <script src="../js/carrito.js"></script>
+    <script src="../js/deseosUser.js"></script>
+    <script src="../js/userConfigurations.js"></script>
+<body>
+<header>
+<button style="float: left;color: black " onclick="salir()">Salir</button>
+<p style="float: left" id="username_p"></p>
+    <script type="text/javascript">
+        var usuario=JSON.parse(sessionStorage.getItem("user"));
+        document.getElementById("username_p").innerHTML=usuario.nombre;
+    </script>
+</header>
+<ul style="float: right">
+    <li><a  class="btn btn-info btn-lg" onclick="cargarDatosUsuario()"><span onclick="cargarDatosUsuario()"class="glyphicon glyphicon-user" data-toggle="modal" data-target="#user"></span></a></li>
+
+    <li ><a id="g_carrito" class="btn btn-info btn-lg" onclick="genera_tabla_carrito()" ><span class="glyphicon glyphicon-shopping-cart"  data-toggle="modal" data-target="#myModal"></span></a></li>
+
+    <li ><a  id="l_deseos" class="btn btn-info btn-lg" onclick="genera_tabla_deseos()"><span  class="glyphicon glyphicon-heart"  data-toggle="modal" data-target="#deseos"></span></a></li>
+
+
+    <!-- View of changing user data-->
+    <div id="user" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div style="color: black" class="modal-body">
+                    <p>Nombre:</p>
+                    <input type="text" id="name_c_c" class="form-control input-sm chat-input" placeholder="nombre de usuario" />
+                    </br>
+                    <p>Primer apellido:</p><input type="text" id="apellido1_c_c" class="form-control input-sm chat-input" placeholder="primer apellido" />
+                    </br>
+                    <p>Segundo apellido:</p><input type="text" id="apellido2_c_c" class="form-control input-sm chat-input" placeholder="segundo apellido" />
+                    </br>
+                    <p>Edad:</p><input type="text" id="edad_c" class="form-control input-sm chat-input" placeholder="edad" />
+                    </br>
+                    <p>Email:</p><input type="text" id="email_c" class="form-control input-sm chat-input" placeholder="email" />
+                    </br>
+                    <p>Direccion:</p><input type="text" id="direccion_c" class="form-control input-sm chat-input" placeholder="direccion" />
+                    </br>
+                    <p>Telefono:</p><input type="text" id="telefono_c" class="form-control input-sm chat-input" placeholder="telefono" />
+                    </br>
+                    <p>Contraseña:</p><input type="text" id="pass_c_c" class="form-control input-sm chat-input" placeholder="contraseña" />
+                    </br>
+                    <p style="float: left"> Estado:</p>
+                    <select style="float: left" id="estado">
+                        <option value="1" onclick="">Activo</option>
+                        <option value="0" onclick="">Inactivo</option>
+                    </select>
+                    <br>
+                    <div class="wrapper">
+                                <span class="group-btn">
+                                    <btn  class="btn btn-primary btn-md" onclick="ModificarUser()" data-dismiss="modal">Modificar <i class="fa fa-sign-in"></i></btn>
+                                </span>
+                    </div>
+                    <br>
+                    <h4>Tarjetas</h4>
+                    <p>Codigo de tarjeta:</p>
+                    <input type="text" id="num_tarjeta_c" class="form-control input-sm chat-input" placeholder="codigo de tarjeta" />
+                    </br></br>
+                    <p style="color: black">Codigo de seguridad</p>
+                    <input type="password" id="cod_s_s" class="form-control input-sm chat-input" placeholder="codigo seguridad" />
+                    </br>
+                    <p>Fecha de expiracion de la tarjeta</p>
+                    <input type="date" id="fecha_expira_c" class="form-control input-sm chat-input" placeholder="fecha de expiracion" />
+                    <br>
+                    <div class="wrapper">
+                                <span class="group-btn">
+                                    <btn  class="btn btn-primary btn-md" onclick="AddTarjeta()" data-dismiss="modal">Agregar tarjeta <i class="fa fa-sign-in"></i></btn>
+                                </span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- View Cart products-->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <section class="t_products">
+                        <table id="table_products_ca" class="table table-bordered" style="color:black"></table>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="comprar" type="button" class="btn btn-default"data-toggle="modal" data-target="#compra" data-dismiss="modal">Comprar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- User Purchase View-->
+    <div id="compra" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button"  class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body" style="color: black">
+
+                    <section class="t_products">
+                        <div class="form-login">
+                            <h4>Digite los datos de su tarjeta</h4>
+                            <p style="color: black">Numero de tarjeta</p>
+                            <input type="password" id="cod_t_c" class="form-control input-sm chat-input" placeholder="Numero de  targeta" />
+                            </br>
+                            <p style="color: black">Fecha de vencimiento</p>
+                            <input type="date" id="fecha_t_c" class="form-control input-sm chat-input" placeholder="fecha de vencimiento" />
+                            </br>
+                            <p style="color: black">Codigo de seguridad</p>
+                                <input type="password" id="cod_s" class="form-control input-sm chat-input" placeholder="codigo seguridad" />
+                            </br>
+                            <div class="wrapper">
+                        <span class="group-btn">
+                            <a  class="btn btn-primary btn-md" onclick="validarCompra()">Comprar <i class="fa fa-sign-in"></i></a>
+                        </span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- User desires view-->
+    <div id="deseos" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="location.reload()"data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div style="color: black" class="modal-body">
+                    <!--<iframe id="myFrame"style="color: black;" src="tablaDeseos.html" width="100%" height="100%"></iframe>-->
+
+                    <section style="color: black" class="t_products">
+
+                        <table id="table_products_deseos" class="table table-bordered"></table>
+
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="location.reload()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</ul>
+
+<!--Categories of products to show-->
+<section class="menu_products_c">
+    <p>Elija la categoria:</p>
+    <select id="categoria_prod_c">
+        <option value="Pizzas pequeñas" onclick="">Pizzas pequeñas</option>
+        <option value="Pizzas medianas" onclick="">Pizzas medianas</option>
+        <option value="Pizzas grandes" onclick="">Pizzas grandes</option>
+        <option value="Pizzas personales" onclick="">Pizzas personales</option>
+        <option value="Gaseosas" onclick="">Gaseosas</option>
+        <option value="Batidos" onclick="">Batidos</option>
+    </select>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators"></ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner"></div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+</section>
+
+<footer>
+    <table >
+        <tr>
+            <td>
+                <a href="https://www.facebook.com/Jogos-PIZZA-381616418862894/" class="image"><img  src="../img/contacto/facebook.png" width="50" height="50"  data-file-width="5293" data-file-height="3970"></a>
+            </td>
+            <td>
+                <a href="https://www.google.co.cr/maps/place/Jogo's+Pizza/@10.3600181,-84.5096313,17z/data=!4m5!3m4!1s0x0:0xc9ec6d06a5eeea29!8m2!3d10.3600181!4d-84.5083299" class="image"><img  src="../img/contacto/contacto.png" width="100" height="50"  data-file-width="5293" data-file-height="3970"></a>
+            </td>
+        </tr>
+    </table>
+    <p>copyright by Luis Andres Fernandez Calderon && Jurguen Romero</p>
+</footer>
+</body>
+</html>
